@@ -31,3 +31,8 @@ HTML, CSS, Python, Django, and SQLite
 - Learning and working with Django models and forms
 - Making migrations and connecting django models to an SQLite database
 - Understanding many to many relationships between Django models
+
+## How to Run the Program:
+- python3 manage.py makemigrations auctions
+- python3 manage.py migrate
+- python3 manage.py runserver

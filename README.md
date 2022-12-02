@@ -8,7 +8,7 @@
     1. bidding options if auction is active
     2. result of the auction if the auction is inactive (ended either manually by owner or by reaching deadline)
     3. option to end the listing early if owned by the user
-    4. option to add to the logged in user's personal watchlist
+    4. option to add product to the user's personal watchlist
     5. a comments section
 - Personal watchlist page for the logged in user
 - Categories page where user can sort auctions by category

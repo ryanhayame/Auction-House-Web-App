@@ -40,7 +40,8 @@
                             <input class="btn btn-primary" type="submit" value="Place Bid">
                         </div>
                     </form>
-                    <h7>Bidding Ends: {{ listing.deadline }}</h7>
+                    <h6>Posted: {{ listing.datepublished }}</h6>
+                    <h6>Bidding Ends: {{ listing.deadline }}</h6>
                 {% elif listing.isActive and owned %}
                     <h3>Current Bid: ${{ listing.bid }}</h3>
                     <form method="post" action="{% url 'close' %}">

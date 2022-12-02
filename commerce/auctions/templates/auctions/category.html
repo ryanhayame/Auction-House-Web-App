@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}{{ category }} Listings{% endblock %}
+
+{% block body %}
+
+    <h2>{{ category }} Listings</h2>
+
+    <div class="listings-container">
+    {% for result in results %}
+        {% if result.isActive and result.deadline > now %}
+            <a class="listing-link" href="{% url 'listing' listing_id=result.id %}">
+                <div class="listing-container">
+                    {% if result.image %}
+                        <img class="listing-img" src="{{ result.image.url }}">
+                    {% else %}
+                        <img class="listing-img" src="https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg">
+                    {% endif %}
+                    <h4>{{ result.title }}<h4>
+                    <h5>${{ result.bid }}</h5>
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+{% endblock %}

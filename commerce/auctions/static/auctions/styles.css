@@ -1,0 +1,147 @@
+body {
+    padding: 10px;
+}
+
+.website-title {
+    font-size: 65px;
+    color: green;
+}
+
+.logged-in {
+    margin-left: auto;
+    padding-top: 8px;
+    margin-right: 120px;
+}
+
+.listings-container {
+    display: flex;
+    height: auto;
+    width: auto;
+    margin: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.listing-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 370px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    margin: 10px;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+    color: black;
+}
+
+.listing-img {
+    height: 220px;
+    width: 220px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.listing-link:hover {
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.listing-body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.listing-main {
+    display: flex;
+    align-items: center;
+}
+
+.item-image {
+    border: 1px solid gray;
+    width: 400px;
+    height: 400px;
+}
+
+.item-info {
+    text-align: center;
+    margin-left: 20px;
+    min-width: 400px;
+    max-width: 400px;
+}
+
+.item-info h2 {
+    font-weight: bold;
+}
+
+.item-info hr {
+    margin-bottom: 20px;
+}
+
+.item-info h3 {
+    margin: 40px 0;
+}
+
+.item-info > h6 {
+    margin: 10px 0;
+}
+
+#watchlist-btn {
+    font-size: 10px;
+    padding: 2px;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.desc-box {
+    margin: 20px;
+    width: 820px;
+    min-width: 820px;
+}
+
+#nav-home-tab {
+    pointer-events: none;
+}
+
+#nav-home {
+    padding: 10px;
+}
+
+.break-line {
+    min-width: 820px;
+    margin-top: 0;
+}
+
+.break-line-2 {
+    min-width: 720px;
+    margin-top: 0;
+}
+
+/* comments section */
+
+.comments-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.comments {
+    width: 720px;
+}
+
+.comment-text {
+    width: 620px;
+    margin: 0 50px;
+}
+
+#comment-input {
+    margin-bottom: 10px;
+}

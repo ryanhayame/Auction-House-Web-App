@@ -1,0 +1,114 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}{{ listing.title }}{% endblock %}
+
+{% block body %}
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success" role="alert">
+        {{ success }}
+    </div>
+    {% endif %}
+    <div class="listing-body">
+        <div class="listing-main">
+            <div>
+                {% if listing.image %}
+                    <img class="item-image" src="{{ listing.image.url }}">
+                {% else %}
+                    <img class="item-image" src="https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg">
+                {% endif %}
+            </div>
+            <div class="item-info">
+                <h2>{{ listing.title }}<h2>
+                <hr>
+                <h5>Seller: {{ listing.owner }}</h5>
+                {% if listing.isActive and not owned %}
+                    <h3>Current Bid: ${{ listing.bid }}</h3>
+                    <form method="post" action="{% url 'listing' listing_id=listing.id %}">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">$</span>
+                            </div>
+                            <input type="number" class="form-control" name="newBid" step="0.01" min="{{ minimum }}" max="9999.99" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-primary" type="submit" value="Place Bid">
+                        </div>
+                    </form>
+                    <h7>Bidding Ends: {{ listing.deadline }}</h7>
+                {% elif listing.isActive and owned %}
+                    <h3>Current Bid: ${{ listing.bid }}</h3>
+                    <form method="post" action="{% url 'close' %}">
+                        {% csrf_token %}
+                        <button name="id" value="{{ listing.id }}" type="submit" class="btn btn-danger">Close Auction</button>
+                    </form> 
+                    <br>
+                    <br>
+                    <h6>Posted: {{ listing.datepublished }}</h6>
+                    <h6>Bidding Ends: {{ listing.deadline }}</h6>
+                {% else %}
+                    <hr>
+                    <h2>Listing is inactive</h2>
+                    <hr>
+                    {% if listing.winner == listing.owner %}
+                        <h5 style="color: red;">Sorry, your item was not sold</h5>
+                    {% elif listing.winner == request.user %}
+                        <h5 style="color: green;">You won this item for ${{ listing.bid }}</h5>
+                    {% else %}
+                        <h5 style="color: blue;">This item sold for ${{ listing.bid }}</h5>
+                    {% endif %}
+                {% endif %}
+                <form method="post" action="{% url 'watchlist' %}">
+                    {% csrf_token %}
+                    {% if listing in request.user.watchlist.all %}
+                        <button name="remove" value="{{ listing.id }}" type="submit" class="btn btn-danger" id="watchlist-btn">Remove From Watchlist</button>
+                    {% else %}
+                        <button name="add" value="{{ listing.id }}" type="submit" class="btn btn-warning" id="watchlist-btn">Add To Watchlist</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+        <div class="break"></div>
+        <div class="desc-box">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">{{ listing.desc }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="comments-container">
+        <hr class="break-line">
+        <h2>Comments</h2>
+        <div class="comments">
+            {% if not listing.comments.all %}
+                <h3>No comments yet</h3>
+            {% else %}
+                {% for comment in listing.comments.all %}
+                    <hr class="break-line-2">
+                    <p><strong>{{ comment.poster }} - {{ comment.timestamp }}</strong></p>
+                    <div class="comment-text">
+                        <p>{{ comment.message }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <hr class="break-line">
+        <h3>Leave a comment</h3>
+        <hr class="break-line">
+        <form method="post" action="{% url 'comment' %}">
+            {% csrf_token %}
+            <textarea name="message" class="form-control" id="comment-input" placeholder="Write your comment here..." rows="4" cols="50" maxlength="500" required></textarea>
+            <button name="id" value="{{ listing.id }}" type="submit">Post Comment</button>
+        </form>
+    </div>
+
+{% endblock %}

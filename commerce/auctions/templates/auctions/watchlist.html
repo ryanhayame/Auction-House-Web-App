@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Watchlist{% endblock %}
+
+{% block body %}
+    <h2>My Watchlist</h2>
+
+    <div class="listings-container">
+        {% for listing in listings %}
+            <a class="listing-link" href="{% url 'listing' listing_id=listing.id %}">
+                <div class="listing-container">
+                    {% if listing.image %}
+                        <img class="listing-img" src="{{ listing.image.url }}">
+                    {% else %}
+                        <img class="listing-img" src="https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg">
+                    {% endif %}
+                    <h4>{{ listing.title }}<h4>
+                    <h5>${{ listing.bid }}</h5>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

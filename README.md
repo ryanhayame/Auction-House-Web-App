@@ -1,5 +1,5 @@
 # Auction-House-Web-App
-## A web application similar to eBay where users can buy and sell products to other users by auctioning and bidding.
+## An E-commerce web application similar to eBay where users can buy and sell products to other users by auctioning and bidding.
 
 ## Features:
 - Homepage to see all active auctions by all users
